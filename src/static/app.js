@@ -47,7 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = e.target.dataset.email;
             await unregisterParticipant(activity, email);
           });
-     Function to unregister a participant
+        });
+
+        // Add option to select dropdown
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        activitySelect.appendChild(option);
+      });
+    } catch (error) {
+      activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
+      console.error("Error fetching activities:", error);
+    }
+  }
+
+  // Function to unregister a participant
   async function unregisterParticipant(activity, email) {
     try {
       const response = await fetch(
@@ -80,20 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error unregistering:", error);
-    }
-  }
-
-  //    });
-
-        // Add option to select dropdown
-        const option = document.createElement("option");
-        option.value = name;
-        option.textContent = name;
-        activitySelect.appendChild(option);
-      });
-    } catch (error) {
-      activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
-      console.error("Error fetching activities:", error);
     }
   }
 
